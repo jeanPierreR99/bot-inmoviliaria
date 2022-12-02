@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#9f002871">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css">
+
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/index.css">
+
+  <script language="javascript" type="text/javaScript" src="./js/slider.js"></script>
+  <link rel="shortcut icon" href="../img/logo.png">
+  <title>Bienes Raíces Picon | Principal</title>
+  <script async src="https://s.widgetwhats.com/wwwa.js" data-wwwa="13817"></script>
+</head>
+
+<body>
+  <!-- Messenger Plugin de chat Code -->
+  <div id="fb-root"></div>
+
+  <!-- Your Plugin de chat code -->
+  <div id="fb-customer-chat" class="fb-customerchat">
+  </div>
+
+  <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "107750521946056");
+    chatbox.setAttribute("attribution", "biz_inbox");
+  </script>
+
+  <!-- Your SDK code -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v14.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/es_ES/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>
+    $(function () {
+      const map = L.map('map').setView([-12.5919315, -69.1868601], 13);
+      var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      //marcadores
+      <% for (var i = 0; i < varResult2.rowCount; i++) {
+        if (varResult2.rows[i].cat_loc_precio != null) {%>
+        var photoIcon = L.icon({
+          iconUrl: '../img/icono22.png',
+          iconSize: [42, 60],
+          'className': 'icono22',
+          popupAnchor: [0, -15]
+        });
+
+          var customPopup = "<div class='ides'><div class='cabeza'><h4 class='catalogo-id'>ID: <%= varResult2.rows[i].cat_loc_id %></h4><h4>|</h4><h4 class='catalogo-estado'><%= varResult2.rows[i].cat_loc_estado %></h4></div></div><img src='../uploads/<%= varResult2.rows[i].cat_loc_prin %>' width='300px' height='200px'/></br><%= varResult2.rows[i].cat_loc_titulo %><br>S/. <%= varResult2.rows[i].cat_loc_precio %><br><%= varResult2.rows[i].cat_loc_desc %><br><a href='/<%= varResult2.rows[i].cat_id %>' class='view' target='_blank'>ver mas</a>";
+          var customOptions = {
+            'maxWidth': 'auto',
+            'className': 'custom',
+          }
+          var marker = L.marker([<%= varResult2.rows[i].cat_loc_lat %>, <%= varResult2.rows[i].cat_loc_long %>], { icon: photoIcon }).bindPopup(customPopup, customOptions).addTo(map);
+
+      <% }
+      } %>
+
+      <% for (var j = 0; j < varResult2.rowCount; j++) {
+        if (varResult2.rows[j].cat_hab_precio != null) {%>
+        var photoIcon = L.icon({
+          iconUrl: '../img/iconodd.png',
+          'className': 'iconodd',
+          iconSize: [42, 60],
+          popupAnchor: [0, -15]
+        });
+
+        var customPopup = "<div class='ides'><div class='cabeza'><h4 class='catalogo-id'>ID: <%= varResult2.rows[j].cat_hab_id %></h4><h4>|</h4><h4 class='catalogo-estado'><%= varResult2.rows[j].cat_hab_estado %></h4></div></div><img src='../uploads/<%= varResult2.rows[j].cat_hab_prin %>' width='300px' height='200px'/></br><%= varResult2.rows[j].cat_hab_titulo %><br>S/. <%= varResult2.rows[j].cat_hab_precio %><br><%= varResult2.rows[j].cat_hab_desc %><br><a href='/<%= varResult2.rows[j].cat_id %>' class='view' target='_blank'>ver mas</a>";
+          var customOptions = {
+            'maxWidth': 'auto',
+            'className': 'custom',
+          }
+          var marker = L.marker([<%= varResult2.rows[j].cat_hab_lat %>, <%= varResult2.rows[j].cat_hab_long %>], { icon: photoIcon }).bindPopup(customPopup, customOptions).addTo(map);
+
+      <% }
+      } %>
+    })
+  </script>
+  <script>
+    $(function(){
+      autoSlide();
+      var elements = document.querySelectorAll(".catalogo-estado");
+      for(var i = 0; i<= elements.length; i++){
+        if(elements[i].outerText == 'disponible'){
+          elements[i].style.color='rgb(239 255 0)';
+        }
+        else{
+          elements[i].style.color='rgb(255 58 58)';
+        }
+      }
+    })
+  </script>
+  <section>
+    <div class="container-xxl">
+      <div class="header" data-aos="fade-down">
+        <div class="titulo" data-aos="fade-right">
+          <img class="logo" src="./img/logo.png" alt="">
+          <h4>Bienes Raices</h4><span>Picon</span>
+        </div>
+
+      </div>
+      <div class="slider">
+        <div class="slides" data-aos="fade-right">
+          <img src="./img/1.jpeg">
+        </div>
+        <div class="slides" data-aos="fade-right">
+          <img src="./img/4.webp">
+        </div>
+        <div class="slides" data-aos="fade-right">
+          <img src="./img/3.jpg">
+        </div>
+        <div class="slides" data-aos="fade-right">
+          <img src="./img/6.jpg">
+        </div>
+        <div class="slides" data-aos="fade-right">
+          <img src="./img/7.jpg">
+        </div>
+        <div class="para" data-aos="fade-right">
+
+          <h3>Somos tu mejor elección</h3>
+          <h3>Nos encargamos de asegurarte el mejor placer y comodidad, con comodos precios.</h3>
+          <a href="#mid" class="comenzar">Comenzar</a>
+        </div>
+      </div>
+      <div class="content-svg">
+        <div class="ani-svg" id="ani-svg"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+            style="height: 100%; width: 100%;">
+            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+              style="stroke: none; fill: #ffff;"></path>
+          </svg></div>
+      </div>
+      <div class="mid" id="mid">
+        <div class="mid_servi" data-aos="fade-down">
+          <h2>Bienes Raíces Picon</h2>
+          <div class="info">
+            <div class="infoR">Somos una agencia inmobiliaria, ofrecemos servicios de
+              alquileres, transacciones y consultoría. Nuestra misión es buscar soluciones inmobiliarias para que personas,
+              empresas, instituciones e inversionistas desarrollen su actividad en las mejores condiciones.</div>
+          </div>
+        </div>
+        <div class="principal">
+          <img class="img_principal" src="/img/ad.svg" alt="" data-aos="fade-right">
+        </div>
+      </div>
+      <div class="mid" id="mid">
+        <div class="principal">
+          <img class="img_principal mover" src="/img/ad2.svg" alt="" data-aos="fade-right">
+        </div>
+        <div class="mid_servi" data-aos="fade-down">
+          <div class="info">
+            <h2>Objetivos Estrategicos</h2>
+            <div class="infoR">
+              <li>Mantener un liderazgo en servicios y desarrollos tecnológicos por encima de nuestra competencia, con el fin de prestar un servicio de primera calidad.</li>
+            <li>Ampliar la cobertura en el mercado, en los estratos medios y altos para ofrecer mayores opciones de servicio a nuestros clientes.</li>
+            <li>Fidelizar a nuestros clientes actuales y potenciales por medio de una atención personalizada, oportuna e integral.  
+              Ofrecer una respuesta rápida y eficiente a sus requerimientos garantizando que la inversión en finca raíz es rentable.</li>
+              <li>Implementar el concepto de calidad total en los servicios, con una constante capacitación del personal, en busca del mejoramiento continuo.</li>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content_map"  id="content_map">
+        <div class="mapa-frase" id="mapa-frase" data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine">
+          <div class="divi">
+            <img src="./img/mundo.gif" alt="">
+            <p style="color: rgb(58, 58, 58)"> TE simplificamos la vida, utiliza nuestro mapa y busca la mejor opcion y comodidad en todo puerto maldonado. Los puntos en <a>verdes</a> referencian a las <a>HABITACIONES</a>
+             y los puntos en <a>rojo</a> referencian a los <a>LOCALES</a></p>
+          </div>
+        </div>
+            
+
+        <div class="mapa" id="map" style="overflow: hidden; border-radius: 10px"
+          data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine">
+          <p class="title-map">Busca la mejor opción</p>
+          <p class="title-map2">Puerto Maldonado</p>
+        </div>
+      </div>
+      
+      <div class="container-body" id="container-body">
+        <div class="listar">
+          <button class=" category_item" category="all">All</button>
+          <button class=" category_item hab" category="habitaciones">Habitaciones</button>
+          <button class=" category_item loc" category="locales">Locales</button>
+        </div>
+        <div class="container-catalogo">
+          <% for(var i=0; i < varResult2.rowCount; i++){ if(varResult2.rows[i].cat_loc_precio !=null){ %>
+            <form class="catalogo" category="locales">
+           
+              <div class="catalogo-body">
+                <div class="img_zoom">
+                  <img src="./uploads/<%= varResult2.rows[i].cat_loc_prin %>" alt="">
+                  <div class="ides">
+                    <h4 class="catalogo-id">ID: <%= varResult2.rows[i].cat_loc_id; %>
+                    </h4>
+                    <h4 class="catalogo-separador">|</h4>
+                    <h4 class="catalogo-estado">
+                      <%= varResult2.rows[i].cat_loc_estado; %>
+                    </h4>
+                  </div>
+                </div>
+                <div class="catalogo-body2">
+                  <div class="ides2" style="display: flex; justify-content: space-evenly">
+                    <h4 class="catalogo-id">ID: <%= varResult2.rows[i].cat_loc_id; %>
+                    </h4>
+                    <h4 class="catalogo-separador">|</h4>
+                    <h4 class="catalogo-estado">
+                      <%= varResult2.rows[i].cat_loc_estado; %>
+                    </h4>
+                  </div>
+                  <h4 class="catalogo-titulo">
+                    <%= varResult2.rows[i].cat_loc_titulo; %>
+                  </h4>
+                  <h4 class="catalogo-precio">S/. <%= varResult2.rows[i].cat_loc_precio; %>
+                  </h4>
+                  <p class="catalogo-precio">
+                    <%= varResult2.rows[i].cat_loc_dir; %>
+                  </p>
+                  <p class="catalogo-desc">
+                    <%= varResult2.rows[i].cat_loc_desc; %>
+                  </p>
+                  <a href="/<%= varResult2.rows[i].cat_id; %>" class="view" target="_blank">ver mas
+                  </a>
+                </div>
+
+              </div>
+            </form>
+            <% } }%>
+              <% for(var i=0; i < varResult2.rowCount; i++){ if(varResult2.rows[i].cat_hab_precio !=null){%>
+                <form class="catalogo" category="habitaciones">
+                  <div class="catalogo-body">
+                    <div class="img_zoom">
+                      <img src="./uploads/<%= varResult2.rows[i].cat_hab_prin %>" alt="">
+                      <div class="ides">
+                        <h4 class="catalogo-id">ID: <%= varResult2.rows[i].cat_hab_id; %>
+                        </h4>
+                        <h4 class="catalogo-separador">|</h4>
+                        <h4 class="catalogo-estado">
+                          <%= varResult2.rows[i].cat_hab_estado; %>
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="catalogo-body2">
+                      <div class="ides2" style="display: flex; justify-content: space-evenly">
+                        <h4 class="catalogo-id">ID: <%= varResult2.rows[i].cat_hab_id; %>
+                        </h4>
+                        <h4 class="catalogo-separador">|</h4>
+                        <h4 class="catalogo-estado">
+                          <%= varResult2.rows[i].cat_hab_estado; %>
+                        </h4>
+                      </div>
+                      <h4 class="catalogo-titulo">
+                        <%= varResult2.rows[i].cat_hab_titulo; %>
+                      </h4>
+                      <h4 class="catalogo-precio">S/. <%= varResult2.rows[i].cat_hab_precio; %>
+                      </h4>
+                      <p class="catalogo-desc">
+                        <%= varResult2.rows[i].cat_hab_desc; %>
+                      </p>
+                      <a href="/<%= varResult2.rows[i].cat_id; %>" class="view" target="_blank">ver mas
+                      </a>
+                    </div>
+    
+                  </div>
+                </form>
+                <% } }%>
+        </div>
+      </div>
+    </div>
+
+   <!-- Footer -->
+   <footer class="text-center text-lg-start bg-light text-muted" data-aos="fade-down">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span style="color:rgb(255, 0, 106); font-weight: 600;">Siguenos en</span>
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div class="nt">
+        <a href="" class="me-4 text-reset">Telegram <i class="bi bi-telegram" id="icono"></i></a>
+        <a href="" class="me-4 text-reset">Facebook <i class="bi bi-facebook" id="icono"></i></a>
+        <a href="" class="me-4 text-reset">WhatsApp <i class="bi bi-whatsapp" id="icono"></i></a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Sobre Nosotros
+            </h6>
+            <p style="text-align: justify;">
+              Somos una agencia inmobiliaria, ofrecemos servicios de
+              alquileres, transacciones y consultoría. Nuestra misión es buscar soluciones inmobiliarias para que personas,
+              empresas, instituciones e inversionistas desarrollen su actividad en las mejores condiciones.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Servicios
+            </h6>
+            <p>
+            Alquileres
+            </p>
+            <p>
+            Locales
+            </p>
+            <p>
+              Habitaciones
+            </p>
+            <p>
+             Consultorias
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Links De Contactos
+            </h6>
+            <p>
+              <li><a href="#!" class="text-reset">944271227</a></li>
+            </p>
+            <p>
+              <li><a href="#!" class="text-reset">921104345</a></li>
+            </p>
+            <p>
+              <li><a href="#!" class="text-reset">943122343</a></li>
+            </p>
+            <p>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Pagians relacionadas
+            </h6>
+            <p><a href="#">Inmovilaria Raiz</a>
+            </p>
+            <p>
+              <a href="#">Venta y compra de lotes  </a>
+            </p>
+            <p><a href="#"> Hospedaje Maldonado</a>
+              <p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: #1b0008; color:white">
+      © 2022 Copyright:
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+  </section>
+  <script async src="https://s.widgetwhats.com/wwwa.js" data-wwwa="13418"></script>
+  <script>
+    $(document).ready(function () {
+      $('#table-cliente').DataTable({
+        "info": false
+      });
+    });
+  </script>
+  <script src="./js/category.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap.min.js"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+<!-- JavaScript Bundle with Popper -->
+
+</html>

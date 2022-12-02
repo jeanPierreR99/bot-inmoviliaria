@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#350e1a">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/index-ver.css">
+  <link rel="shortcut icon" href="../img/logo.png">
+
+  <% if(varResult.rows[0].cat_loc_precio != null){%>
+  <title>Bienes Raíces Picon | <%= varResult.rows[0].cat_loc_id; %></title>
+  <%} else{%>
+    <title>Bienes Raíces Picon | <%= varResult.rows[0].cat_hab_id; %></title>
+  <%}%>
+  <script async src="https://s.widgetwhats.com/wwwa.js" data-wwwa="13817"></script>
+  
+</head>
+
+<body>
+  <!-- Messenger Plugin de chat Code -->
+  <div id="fb-root"></div>
+
+  <!-- Your Plugin de chat code -->
+  <div id="fb-customer-chat" class="fb-customerchat">
+  </div>
+
+  <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "107750521946056");
+    chatbox.setAttribute("attribution", "biz_inbox");
+  </script>
+
+  <!-- Your SDK code -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v14.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/es_ES/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>
+    $(function () {
+      <% if(varResult.rows[0].cat_loc_precio != null){%>
+
+      const map = L.map('map').setView([<%= varResult.rows[0].cat_loc_lat %>, <%= varResult.rows[0].cat_loc_long %>], 17);
+      var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      var photoIcon = L.icon({
+        iconUrl: '../img/puntero.png',
+        iconSize: [60, 70],
+        popupAnchor: [0, -15]
+      });
+
+      L.marker([<%= varResult.rows[0].cat_loc_lat %>, <%= varResult.rows[0].cat_loc_long %>], { icon: photoIcon }).addTo(map).bindPopup('lugar actual').openPopup();
+
+      <%} else{%>
+        const map = L.map('map').setView([<%= varResult.rows[0].cat_hab_lat %>, <%= varResult.rows[0].cat_hab_long %>], 17);
+      var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      var photoIcon = L.icon({
+        iconUrl: '../img/puntero.png',
+        iconSize: [60, 70],
+        popupAnchor: [0, -15]
+      });
+
+      L.marker([<%= varResult.rows[0].cat_hab_lat %>, <%= varResult.rows[0].cat_hab_long %>], { icon: photoIcon }).addTo(map).bindPopup('lugar actual').openPopup();
+
+  <%}%>
+    
+    })
+  </script>
+  
+  <div class="header" data-aos="fade-down">
+    <div class="titulo" data-aos="fade-right">
+      <img class="logo" src="./img/logo.png" alt="">
+      <h4>Bienes Raices</h4><span>Picon</span>
+    </div>
+
+  </div>
+  <div class="mid" id="mid">
+    <div class="mid_servi" data-aos="fade-down">
+      <h2>Bienes Raíces Picon</h2>
+      <div class="info">
+        <div class="infoR">Somos una agencia inmobiliaria, ofrecemos servicios de
+          alquileres, transacciones y consultoría. Nuestra misión es buscar soluciones inmobiliarias para que personas,
+          empresas, instituciones e inversionistas desarrollen su actividad en las mejores condiciones.</div>
+      </div>
+    </div>
+    <div class="principal">
+      <img class="img_principal" src="/img/ad3.svg" alt="" data-aos="fade-right">
+    </div>
+  </div>
+    <div class="containers">
+      <div class="top">
+        <div class="content-map">
+          <div class="mapa" id="map"></div>
+        </div>
+          <% if(varResult.rows[0].cat_loc_precio != null){%>
+            <div class="container-slider">
+            <div class="slider">
+              <div class="slider-section">
+            <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_loc_prin; %>" alt="" data-aos="fade-left">
+          </div>
+          <div class="slider-section">
+            <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_loc_sec; %>" alt="" data-aos="fade-left">
+          </div>
+          <div class="slider-section">
+            <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_loc_ter; %>" alt="" data-aos="fade-left">
+          </div>
+
+          </div>
+          <i class="bi bi-chevron-left botones boton-left" id="boton-left"></i>
+          <i class="bi bi-chevron-right botones boton-right" id="boton-right"></i>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="bottom-left"  data-aos="fade-right">
+          <div class="seccion">
+            <h2><i class="bi bi-upc-scan"></i>ID</h2>
+            <span>
+              <%= varResult.rows[0].cat_loc_id; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-shield"></i>Estado</h2>
+            <span>
+              <%= varResult.rows[0].cat_loc_estado; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-cash-coin"></i>Precio</h2>
+            <span>
+              S/. <%= varResult.rows[0].cat_loc_precio; %>
+            </span>
+          </div>
+        </div>
+        <div class="bottom-right" data-aos="fade-right" >
+          <div class="seccion">
+            <h2><i class="bi bi-chat-square-text"></i>Descripcion</h2>
+            <span>
+              <%= varResult.rows[0].cat_loc_desc; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-geo-alt"></i>Direccion</h2>
+            <span>
+              <%= varResult.rows[0].cat_loc_dir; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-fullscreen-exit"></i>Tamaño</h2>
+            <span>
+              <%= varResult.rows[0].cat_loc_tamaño; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-calendar-week"></i>Fecha de publicacion</h2>
+            <span></i>
+              <%= varResult.rows[0].cat_fecha; %>
+            </span>
+          </div>
+        </div>
+      </div>
+      <%}else {%>
+        <div class="container-slider">
+          <div class="slider">
+            <div class="slider-section">
+          <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_hab_prin; %>" alt="" data-aos="fade-left">
+        </div>
+        <div class="slider-section">
+          <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_hab_sec; %>" alt="" data-aos="fade-left">
+        </div>
+        <div class="slider-section">
+          <img class="imagen" src="./uploads/<%= varResult.rows[0].cat_hab_ter; %>" alt="" data-aos="fade-left">
+        </div>
+
+        </div>
+        <i class="bi bi-chevron-left botones boton-left" id="boton-left"></i>
+        <i class="bi bi-chevron-right botones boton-right" id="boton-right"></i>
+      </div>
+      </div>
+      <div class="bottom">
+        <div class="bottom-left"  data-aos="fade-right">
+          <div class="seccion">
+            <h2><i class="bi bi-upc-scan"></i>ID</h2>
+            <span>
+              <%= varResult.rows[0].cat_hab_id; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-shield"></i>Estado:</h2>
+            <span>
+              <%= varResult.rows[0].cat_hab_estado; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-cash-coin"></i>Precio</h2>
+            <span>
+              S/. <%= varResult.rows[0].cat_hab_precio; %>
+            </span>
+          </div>
+        </div>
+        <div class="bottom-right" data-aos="fade-right" >
+          <div class="seccion">
+            <h2><i class="bi bi-chat-square-text"></i>Descripcion</h2>
+            <span>
+              <%= varResult.rows[0].cat_hab_desc; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-geo-alt"></i>Direccion</h2>
+            <span>
+              <%= varResult.rows[0].cat_hab_dir; %>
+            </span>
+          </div>
+          <div class="seccion">
+            <h2><i class="bi bi-calendar-week"></i>Fecha de publicacion</h2>
+            <span></i>
+              <%= varResult.rows[0].cat_fecha; %>
+            </span>
+          </div>
+        </div>
+      </div>
+        <%}%>
+
+      
+      <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted" data-aos="fade-down">
+      <!-- Section: Social media -->
+      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+          <span style="color:rgb(255, 0, 106); font-weight: 600;">Siguenos en</span>
+        </div>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div class="nt">
+          <a href="" class="me-4 text-reset">Telegram <i class="bi bi-telegram" id="icono"></i></a>
+          <a href="" class="me-4 text-reset">Facebook <i class="bi bi-facebook" id="icono"></i></a>
+          <a href="" class="me-4 text-reset">WhatsApp <i class="bi bi-whatsapp" id="icono"></i></a>
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>Sobre Nosotros
+              </h6>
+              <p style="text-align: justify;">
+                Somos una agencia inmobiliaria, ofrecemos servicios de
+                alquileres, transacciones y consultoría. Nuestra misión es buscar soluciones inmobiliarias para que personas,
+                empresas, instituciones e inversionistas desarrollen su actividad en las mejores condiciones.
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Servicios
+              </h6>
+              <p>
+              Alquileres
+              </p>
+              <p>
+              Locales
+              </p>
+              <p>
+                Habitaciones
+              </p>
+              <p>
+               Consultorias
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Links De Contactos
+              </h6>
+              <p>
+                <li><a href="#!" class="text-reset">944271227</a></li>
+              </p>
+              <p>
+                <li><a href="#!" class="text-reset">921104345</a></li>
+              </p>
+              <p>
+                <li><a href="#!" class="text-reset">943122343</a></li>
+              </p>
+              <p>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Pagians relacionadas
+              </h6>
+              <p><a href="#">Inmovilaria Raiz</a>
+              </p>
+              <p>
+                <a href="#">Venta y compra de lotes  </a>
+              </p>
+              <p><a href="#"> Hospedaje Maldonado</a>
+                <p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div class="text-center p-4" style="background-color: #1b0008; color:white">
+        © 2022 Copyright:
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </div>
+  <script src="/js/slider-ver.js"></script>
+  <script async src="https://s.widgetwhats.com/wwwa.js" data-wwwa="13418"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+</body>
+
+</html>
