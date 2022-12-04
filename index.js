@@ -29,16 +29,17 @@ app.use('/nuevo', (req,res)=>{
 });
 const rutas = require('./controllers/index.controller-cliente');
 
-app.use('/catalogo', (req,res)=>{
+app.use('/nuevo', (req,res)=>{
   console.log("pagina principal error");
 
 });
   
 app.use('/nuevo2', (req,res)=>{
-  res.render('./public/views/partials/index.ejs');
+ res.send("error 2");
 });
-app.use('/nuevo3', (req,res)=>{
-  res.sendFile(path.resolve(__dirname, './public/error.html'));
+app.use('/catalogo', (req,res)=>{
+  console.log("ejs");
+  res.sendFile(path.resolve(__dirname, './public/error.ejs'));
 });
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
