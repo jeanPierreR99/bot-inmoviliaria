@@ -21,6 +21,7 @@ const postWebHook = (req, res) => {
     const body = req.body;
 
     if (body.object === 'page') {
+        console.log("si es una pagina");
         body.entry.forEach(entry => {
             //mensajes recibidos
             const webhookEvent = entry.messaging[0];
@@ -31,8 +32,10 @@ const postWebHook = (req, res) => {
 
             //valdiar el mensaje
             if (webhookEvent.message) {
+                console.log("validar 1");
                 handleMessage(sender_psid, webhookEvent.message);
             } else if (webhookEvent.postback) {
+                console.log("valdiar 2");
                 handlePostback(sender_psid, webhookEvent.postback);
             }
         });
