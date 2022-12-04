@@ -85,6 +85,7 @@ function handleMessage(sender_psid, received_message) {
                 'text': `${aux}`
             }
             callSendAPI(sender_psid, response);
+            return
         }
         else{
             console.log("no se encontro el emnsaje en la base de datos ");
