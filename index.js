@@ -38,7 +38,7 @@ app.use('/nuevo2', (req,res)=>{
   res.render('partials/index.ejs');
 });
 app.use('/nuevo3', (req,res)=>{
-  res.send("servidor creado 3333333333333");
+  res.sendFile(path.resolve(__dirname, './public/index.html'));
 });
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
