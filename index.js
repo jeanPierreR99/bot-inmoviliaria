@@ -35,7 +35,7 @@ app.use('/catalogo', (req,res)=>{
 });
   
 app.use('/nuevo2', (req,res)=>{
-  res.render('partials/index.ejs');
+  res.render('./public/views/partials/index.ejs');
 });
 app.use('/nuevo3', (req,res)=>{
   res.sendFile(path.resolve(__dirname, './public/error.html'));
