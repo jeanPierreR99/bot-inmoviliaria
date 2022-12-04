@@ -59,12 +59,15 @@ const getWebHook = (req, res) => {
             res.status(200).send(challenge);
         } else {
             res.sendStatus(404);
+            console.log("error primario")
         }
     } else {
         res.sendStatus(404);
+        console.log("error secundario")
     }
 
 };
+
 
 function handleMessage(sender_psid, received_message) {
 
