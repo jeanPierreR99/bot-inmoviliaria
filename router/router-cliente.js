@@ -3,6 +3,8 @@ const router = express.Router();
 
 const rutas = require('../controllers/index.controller-cliente');
 
-router.get('/', rutas.mainCatalogo);
-router.get('/:id', rutas.secondCatalogo);
+router.get('/', (req,res)=>{
+    res.send("ruta principal");
+});
+//router.get('/:id', rutas.secondCatalogo);
 module.exports = router;
