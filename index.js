@@ -31,8 +31,7 @@ app.use('/nuevo', (req,res)=>{
 const rutas = require('./controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
-  app.get('/', rutas.mainCatalogo);
-  //app.get('/:id', rutas.secondCatalogo);
+  res.render('catalogo.ejs')
 });
   
 app.use('/nuevo2', (req,res)=>{
