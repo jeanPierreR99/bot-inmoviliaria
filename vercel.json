@@ -8,8 +8,24 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "router/router-cliente"
+            "src": "./router",
+            "dest": "./router/router-cliente",
+            "continue": true
+        },
+        {
+            "src": "./router",
+            "dest": "./router/router-login" ,
+            "continue": true
+        },
+        {
+            "src": "./router",
+            "dest": "./router/router-webhook",
+            "continue": true
+        },
+        {
+            "src": "./router",
+            "dest": "./router/router-admi",
+            "continue": true
         }
     ]
 }
