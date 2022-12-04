@@ -28,6 +28,15 @@ app.use('/webhook', require('./router/router-webhook'));*/
 app.use('/nuevo', (req,res)=>{
   res.send("servidor creado");
 });
+app.use('/nuevo1', (req,res)=>{
+  res.send("servidor creado 11111");
+});
+app.use('/nuevo2', (req,res)=>{
+  res.send("servidor creado 2222222");
+});
+app.use('/nuevo3', (req,res)=>{
+  res.send("servidor creado 3333333333333");
+});
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
     console.log("servidor iniciado...");
