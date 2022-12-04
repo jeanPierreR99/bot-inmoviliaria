@@ -25,7 +25,7 @@ app.use(session({
 app.use('/login', require('./router/router-login'));
 app.use('/', require('./router/router-cliente'));
 app.use('/webhook', require('./router/router-webhook'));*/
-app.use('/', (req,res)=>{
+app.use('/nuevo', (req,res)=>{
   res.send("servidor creado");
 });
 const PORT =process.env.PORT || 8080;
