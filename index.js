@@ -6,7 +6,7 @@ const { json } = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const app = express().use(bodyParser.json());
-
+var path = require('path');
 app.use(express.urlencoded({extended:false}));
 
 app.engine('ejs', engine);
@@ -28,10 +28,11 @@ app.use('/webhook', require('./router/router-webhook'));*/
 app.use('/nuevo', (req,res)=>{
   res.send("servidor creado");
 });
-const rutas = require('./src/controllers/index.controller-cliente');
+const rutas = require('./controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
-  res.render('error.ejs')
+  console.log("pagina principal error");
+  res.sendFile(path.resolve(__dirname, './views/error.ejs'));
 });
   
 app.use('/nuevo2', (req,res)=>{
