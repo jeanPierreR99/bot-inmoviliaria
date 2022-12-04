@@ -9,23 +9,19 @@
     "routes": [
         {
             "src": "./router",
-            "dest": "./router/router-cliente",
-            "continue": true
+            "dest": "./router/router-cliente"
         },
         {
             "src": "./router",
-            "dest": "./router/router-login" ,
-            "continue": true
+            "dest": "./router/router-login" 
         },
         {
             "src": "./router",
-            "dest": "./router/router-webhook",
-            "continue": true
+            "dest": "./router/router-webhook"
         },
         {
             "src": "./router",
-            "dest": "./router/router-admi",
-            "continue": true
+            "dest": "./router/router-admi"
         }
     ]
 }
