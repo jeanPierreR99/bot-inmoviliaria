@@ -21,9 +21,9 @@ app.use(session({
     resave: true,
   }));
 
-app.use('/admi', require('./router/router-admi'));
-app.use('/login', require('./router/router-login'));
-app.use('/', require('./router/router-cliente'));
+//app.use('/admi', require('./router/router-admi'));
+//app.use('/login', require('./router/router-login'));
+//app.use('/', require('./router/router-cliente'));
 app.use('/webhook', require('./router/router-webhook'));
 
 const PORT =process.env.PORT || 8080;
