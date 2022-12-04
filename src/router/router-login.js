@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const rutas = require('../controllers/index.controller-login');
+const rutas = require('../../controllers/index.controller-login');
 
 router.get('/', rutas.main);
 router.post('/validar', rutas.validar);

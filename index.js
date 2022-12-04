@@ -28,7 +28,7 @@ app.use('/webhook', require('./router/router-webhook'));*/
 app.use('/nuevo', (req,res)=>{
   res.send("servidor creado");
 });
-const rutas = require('./controllers/index.controller-cliente');
+const rutas = require('./src/controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
   res.render('error.ejs')
