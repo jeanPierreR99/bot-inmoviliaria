@@ -22,7 +22,10 @@ app.use(session({
   }));
 
 //app.use('/admi', require('./router/router-admi'));
-//app.use('/login', require('./router/router-login'));
+app.use('/login', require('./router/router-login'));
+app.use('/inicio', (req,res)=>{
+  res.send("mensaje nuevo")
+})
 //app.use('/', require('./router/router-cliente'));
 app.use('/webhook', require('./router/router-webhook'));
 
