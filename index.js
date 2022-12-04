@@ -28,9 +28,10 @@ app.use('/webhook', require('./router/router-webhook'));*/
 app.use('/nuevo', (req,res)=>{
   res.send("servidor creado");
 });
-app.use('/nuevo1', (req,res)=>{
-  res.send("servidor creado 11111");
-});
+const rutas = require('./controllers/index.controller-cliente');
+
+router.use('/', rutas.mainCatalogo);
+  
 app.use('/nuevo2', (req,res)=>{
   res.send("servidor creado 2222222");
 });
