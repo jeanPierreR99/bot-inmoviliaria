@@ -6,7 +6,6 @@ const { json } = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const app = express().use(bodyParser.json());
-var path = require('path');
 app.use(express.urlencoded({extended:false}));
 
 app.engine('ejs', engine);
@@ -32,11 +31,11 @@ const rutas = require('./controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
   console.log("pagina principal error");
-  res.sendFile(path.resolve(__dirname, './views/error.ejs'));
+
 });
   
 app.use('/nuevo2', (req,res)=>{
-  res.send("servidor creado 2222222");
+  res.render('error.ejs')
 });
 app.use('/nuevo3', (req,res)=>{
   res.send("servidor creado 3333333333333");
