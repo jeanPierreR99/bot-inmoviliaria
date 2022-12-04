@@ -4,8 +4,8 @@ const router = express.Router();
 
 const rutas = require('../controllers/index.controller-webhook');
 
-router.get('/webhook', rutas.getWebHook);
-router.post('/webhook', rutas.postWebHook); 
+router.get('/', rutas.getWebHook);
+router.post('/', rutas.postWebHook); 
 
 
 module.exports = router;
