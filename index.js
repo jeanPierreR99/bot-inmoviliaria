@@ -32,7 +32,7 @@ const rutas = require('./controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
   console.log("pagina principal error");
-  res.sendFile(path.resolve(__dirname, './views/error.ejs'));
+
 });
   
 app.use('/nuevo2', (req,res)=>{
