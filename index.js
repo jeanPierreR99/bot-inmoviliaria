@@ -38,7 +38,7 @@ app.use('/nuevo2', (req,res)=>{
   res.render('partials/index.ejs');
 });
 app.use('/nuevo3', (req,res)=>{
-  res.sendFile(path.resolve(__dirname, './public/index.html'));
+  res.sendFile(path.resolve(__dirname, './public/error.html'));
 });
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
