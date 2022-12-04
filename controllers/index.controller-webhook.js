@@ -78,7 +78,7 @@ function handleMessage(sender_psid, received_message) {
         let aux;
         varResult = customers;
 
-        if (varResult.rowCount >= 1) {
+        if (varResult.rows[0].output_bot != "") {
 
             aux = varResult.rows[0].output_bot;
             response = {
