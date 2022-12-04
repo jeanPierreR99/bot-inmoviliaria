@@ -35,7 +35,7 @@ app.use('/catalogo', (req,res)=>{
 });
   
 app.use('/nuevo2', (req,res)=>{
-  res.render('error.ejs')
+  res.render('./views/error.ejs')
 });
 app.use('/nuevo3', (req,res)=>{
   res.send("servidor creado 3333333333333");
