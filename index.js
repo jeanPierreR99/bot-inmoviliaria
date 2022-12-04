@@ -31,7 +31,7 @@ app.use('/nuevo', (req,res)=>{
 const rutas = require('./controllers/index.controller-cliente');
 
 app.use('/catalogo', (req,res)=>{
-  res.render('catalogo.ejs')
+  res.render('error.ejs')
 });
   
 app.use('/nuevo2', (req,res)=>{
