@@ -6,6 +6,7 @@ const { json } = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const app = express().use(bodyParser.json());
+
 app.use(express.urlencoded({extended:false}));
 
 app.engine('ejs', engine);
@@ -20,27 +21,11 @@ app.use(session({
     resave: true,
   }));
 
-/*app.use('/admi', require('./router/router-admi'));
+app.use('/admi', require('./router/router-admi'));
 app.use('/login', require('./router/router-login'));
 app.use('/', require('./router/router-cliente'));
-app.use('/webhook', require('./router/router-webhook'));*/
-app.use('/nuevo', (req,res)=>{
-  res.send("servidor creado");
-});
-const rutas = require('./controllers/index.controller-cliente');
+app.use('/webhook', require('./router/router-webhook'));
 
-app.use('/nuevo', (req,res)=>{
-  console.log("pagina principal error");
-
-});
-  
-app.use('/nuevo2', (req,res)=>{
- res.send("error 2");
-});
-app.use('/catalogo', (req,res)=>{
-  console.log("ejs");
-  res.sendFile(path.resolve(__dirname, './public/error.ejs'));
-});
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
     console.log("servidor iniciado...");
