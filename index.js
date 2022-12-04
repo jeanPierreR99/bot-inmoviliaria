@@ -23,10 +23,10 @@ app.use(session({
 
 //app.use('/admi', require('./router/router-admi'));
 //app.use('/login', require('./router/router-login'));
-//app.use('/', require('./router/router-cliente'));
+app.use('/', require('./router/router-cliente'));
 app.use('/webhook', require('./router/router-webhook'));
 app.use('/inicio',(req,res)=>{
-  res.send("pagina de inicio");
+  res.send("pagina de inicio 2");
 })
 const PORT =process.env.PORT || 8080;
 app.listen(PORT, ()=>{
